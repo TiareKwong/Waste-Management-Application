@@ -39,6 +39,7 @@ This app utilizes **Flutter** for the frontend, **Node.js** for the backend, and
    Table: report
 
 3 **Create Tables**
+```bash
 CREATE TABLE reports (
   id INT AUTO_INCREMENT PRIMARY KEY,
   description TEXT,
@@ -47,6 +48,7 @@ CREATE TABLE reports (
   longitude DOUBLE,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+```
 
 
 ## Getting Started
