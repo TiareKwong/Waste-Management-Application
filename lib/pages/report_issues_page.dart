@@ -5,6 +5,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart'; // For map
 import 'package:location/location.dart'; // For requesting location
 import 'package:http/http.dart' as http;
 import 'full_screen_map.dart';
+import '../api_service.dart'; // Import the ApiService class
 
 class ReportIssuesPage extends StatefulWidget {
   @override
@@ -13,6 +14,7 @@ class ReportIssuesPage extends StatefulWidget {
 
 class _ReportIssuesPageState extends State<ReportIssuesPage> {
   final _descriptionController = TextEditingController();
+  final ApiService apiService = ApiService();
   bool _isLoading = false;
   File? _image; // Image picked by user
   LatLng? _location; // Location picked by user
@@ -142,37 +144,27 @@ class _ReportIssuesPageState extends State<ReportIssuesPage> {
     });
 
     try {
-      var request = http.MultipartRequest(
-        'POST',
-        Uri.parse('https://4c48-101-98-168-49.ngrok-free.app/reports'),
+      // Call the ApiService method to submit the report with an image
+      await apiService.submitReportWithImage(
+        _descriptionController.text,
+        _location!.latitude,
+        _location!.longitude,
+        _image!.path,
       );
 
-      request.fields['description'] = _descriptionController.text;
-      request.fields['latitude'] = _location!.latitude.toString();
-      request.fields['longitude'] = _location!.longitude.toString();
-
-      if (_image != null) {
-        request.files.add(await http.MultipartFile.fromPath('image', _image!.path));
-      }
-
-      var response = await request.send();
-
-      if (response.statusCode == 200) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Report submitted successfully!')),
-        );
-        setState(() {
-          _descriptionController.clear();
-          _image = null;
-          _isLoading = false;
-        });
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Failed to submit report.')),
-        );
-      }
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Report submitted successfully!')),
+      );
+      setState(() {
+        _descriptionController.clear();
+        _image = null;
+        _isLoading = false;
+      });
     } catch (e) {
       print("Error: $e");
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Failed to submit report.')),
+      );
     } finally {
       setState(() {
         _isLoading = false;
