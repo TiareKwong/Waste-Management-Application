@@ -35,8 +35,10 @@ This app utilizes **Flutter** for the frontend, **Node.js** for the backend, and
    run "flutter pub get"
 
 2. **Create Database**
+```bash
    Database-name: waste_management
    Table: report
+   ```
 
 3 **Create Tables**
 ```bash

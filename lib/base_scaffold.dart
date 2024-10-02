@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'pages/home_page.dart';        // Import the pages
-import 'pages/report_issues_page.dart';
+import 'views/home_page.dart';        // Import the pages
+import 'views/report/report_issues_page.dart';
 
 class BaseScaffold extends StatefulWidget {
   const BaseScaffold({Key? key}) : super(key: key);

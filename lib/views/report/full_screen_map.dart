@@ -17,19 +17,26 @@ class _FullScreenMapPageState extends State<FullScreenMapPage> {
   @override
   void initState() {
     super.initState();
-    _selectedLocation = widget.initialLocation; // Set the initial location
+    // Set the initial location to the passed location or a default value
+    _selectedLocation = widget.initialLocation ?? LatLng(40.7128, -74.0060); // Default location is New York City
   }
 
-  // Update the selected location on map tap
+  // Update the selected location when the user taps on the map
   void _onMapTapped(LatLng tappedPoint) {
     setState(() {
       _selectedLocation = tappedPoint;
     });
   }
 
-  // Method to confirm the selected location and return it to the previous screen
+  // Confirm the selected location and return it to the previous screen
   void _confirmLocation() {
-    Navigator.pop(context, _selectedLocation); // Return the selected location
+    if (_selectedLocation != null) {
+      Navigator.pop(context, _selectedLocation); // Return the selected location
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Please select a location')),
+      );
+    }
   }
 
   @override
@@ -46,10 +53,10 @@ class _FullScreenMapPageState extends State<FullScreenMapPage> {
       ),
       body: GoogleMap(
         initialCameraPosition: CameraPosition(
-          target: _selectedLocation ?? LatLng(40.7128, -74.0060), // Default location
+          target: _selectedLocation!, // Center on the selected location
           zoom: 15,
         ),
-        onTap: _onMapTapped, // Update the selected location on tap
+        onTap: _onMapTapped, // Update the selected location on map tap
         markers: _selectedLocation != null
             ? {
                 Marker(
