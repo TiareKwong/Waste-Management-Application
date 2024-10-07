@@ -12,7 +12,6 @@ class FullScreenMapPage extends StatefulWidget {
 
 class _FullScreenMapPageState extends State<FullScreenMapPage> {
   LatLng? _selectedLocation;
-  GoogleMapController? _mapController;
 
   @override
   void initState() {
