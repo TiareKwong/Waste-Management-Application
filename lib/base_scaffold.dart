@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'views/home_page.dart';        // Import the pages
 import 'views/report/report_issues_page.dart';
+import 'views/collection_schedule/collection_schedule_page.dart';
 
 class BaseScaffold extends StatefulWidget {
   const BaseScaffold({Key? key}) : super(key: key);
@@ -17,7 +18,7 @@ class _BaseScaffoldState extends State<BaseScaffold> {
     HomePage(),           // Home page widget from the pages folder
     ReportIssuesPage(),    // Report issues page widget from the pages folder
     Center(child: Text("Search Page Placeholder")),    // Placeholder for now
-    Center(child: Text("Info Page Placeholder")),      // Placeholder for now
+    CollectionSchedulePage(),  // Collection Schedule placeholder
     Center(child: Text("Settings Page Placeholder")),  // Placeholder for now
   ];
 
@@ -69,8 +70,8 @@ class _BaseScaffoldState extends State<BaseScaffold> {
             label: 'Search',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.info),
-            label: 'Info',
+            icon: Icon(Icons.calendar_today),  // Changed icon to match "Collection Schedule"
+            label: 'Schedule',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),

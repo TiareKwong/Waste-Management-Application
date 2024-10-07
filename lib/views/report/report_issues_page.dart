@@ -104,7 +104,6 @@ class _ReportIssuesPageState extends State<ReportIssuesPage> {
   }
 
   // Open full-screen map for location selection
-  // Open full-screen map for location selection
   Future<void> _navigateToFullScreenMap() async {
     final selectedLocation = await Navigator.push(
       context,
@@ -244,12 +243,6 @@ class _ReportIssuesPageState extends State<ReportIssuesPage> {
                                     print('GoogleMapController initialized');
                                     _takeSnapshot(); // Take the snapshot after map is created
                                   },
-                                  zoomControlsEnabled: false, // Default zoom controls
-                                  myLocationEnabled: true, // Show current location on map
-                                  myLocationButtonEnabled: true, // Button to recenter on current location
-                                  scrollGesturesEnabled: true, // Enable map scrolling
-                                  zoomGesturesEnabled: true,  // Enable pinch to zoom
-                                  mapType: MapType.normal, // Normal map type
                                 ),
                               ),
                       ),
