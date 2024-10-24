@@ -10,7 +10,6 @@ class CollectionSchedulePage extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: Text('Collection Schedule'),
-          backgroundColor: Colors.black,
         ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
